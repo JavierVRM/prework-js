@@ -183,41 +183,58 @@ function moveForward(rover) {
 // retroceder
 function moveBackwards(rover) {
   console.log("moveBackwards was called")
+  var obstacle = false;
   if (rover.direction === "N") {
+    for (var i = 0; i < obstaclesX.length; i++) {
+      if (rover.x === obstaclesX[i] && rover.y + 1 === obstaclesY[i]) {
+        obstacle = true;
+        errorObstacleLog();
+      }
+    } 
     if (rover.y === 9) {
       errorLog();
-    } else if ((rover.x === obstacleX && rover.y + 1 === obstacleY) || (rover.x === rover2.x && rover.y + 1 === rover2.y)) {
-      errorObstacleLog();
     } else {
       rover.y = rover.y + 1; 
       positionLog();
       pushTravelLog();
     } 
   } else if (rover.direction === "S") {
+    for (var i = 0; i < obstaclesX.length; i++) {
+      if (rover.x === obstaclesX[i] && rover.y - 1 === obstaclesY[i]) {
+        obstacle = true;
+        errorObstacleLog();
+      }
+    }
     if (rover.y === 0) {
       errorLog();
-    } else if ((rover.x === obstacleX && rover.y - 1 === obstacleY) || (rover.x === rover2.x && rover.y - 1 === rover2.y)) {
-      errorObstacleLog();
     } else {
       rover.y = rover.y - 1;
       positionLog();
       pushTravelLog();
     }    
   } else if (rover.direction === "E") {
+    for (var i = 0; i < obstaclesX.length; i++) {
+      if (rover.x - 1 === obstaclesX[i] && rover.y === obstaclesY[i]) {
+        obstacle = true;
+        errorObstacleLog();
+      }
+    }
     if (rover.x === 0) {
       errorLog();
-    } else if ((rover.x - 1 === obstacleX && rover.y === obstacleY) || (rover.x - 1 === rover2.x && rover.y === rover2.y)) {
-      errorObstacleLog();
     } else {
       rover.x = rover.x - 1;
       positionLog();
       pushTravelLog();
     }
   } else if (rover.direction === "W") {
+    for (var i = 0; i < obstaclesX.length; i++) {
+      if (rover.x + 1 === obstaclesX[i] && rover.y === obstacleY[i]) {
+        obstacle = true;
+        errorObstacleLog();
+      }
+    }
     if (rover.x === 9) {
       errorLog();
-    } else if ((rover.x + 1 === obstacleX && rover.y === obstacleY) || (rover.x + 1 === rover2.x && rover.y === rover2.y)) {
-      errorObstacleLog();
     } else {
       rover.x = rover.x + 1;
       positionLog();
